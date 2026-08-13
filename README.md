@@ -27,5 +27,15 @@ The company is experiencing a downward trend in revenue and does not yet have a 
 - Analysis Period: January-March 2025
 
 ### Feature Categories
-- Product Information:
+- Product Information: Product Name, Category, Quantity, Total Price
+- Store & Location Information: Province, City, Store Name
+- Transaction Information: Order ID, Transaction Status, Payment Method, Shipping Method
+- Time Information: Transaction Date, Transaction Time, Day Name, Month
+
+### Data Quality Issue
+- Missing value shipping methode
+
+## Analytics
+
+
 
