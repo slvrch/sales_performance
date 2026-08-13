@@ -7,3 +7,25 @@ Retail Crystal, during the January-March 2025 period, experienced high transacti
 Therefore, a retail sales performance dashboard has been created to assist with sales analysis, monitor key KPIs, and support decision-making based on transaction data.
 
 ## Business Problem
+
+The company is experiencing a downward trend in revenue and does not yet have a structured sales monitoring system in place to understand the factors affecting its business performance
+
+## Problem Statement
+
+- What were the sales trends during the January-March 2025 period?
+- Which products made the largest contribution to revenue?
+- Which category had the highest sales volume?
+- Which region was the main contributor to revenue?
+- When are customers most active in making purchase?
+
+## Data Understanding
+
+### Dataset Overview
+- Total records: 2000
+- Fact table: Sales Transactions
+- Dimension: Product, Store, User
+- Analysis Period: January-March 2025
+
+### Feature Categories
+- Product Information:
+
