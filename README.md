@@ -82,6 +82,11 @@ Insight:
 
 ## Recommendation
 
-- Increase AOV
+- Increase AOV through bundling and cross-selling
+- Focus promotions on high-revenue products
+- Optimize inventory for high-volume categories
+- Focus campaigns on the Top 5 cities
+- Run promotions during peak transaction times
+- Combine products, regions and transaction times to create data-driven campaigns, such as promotions for sports products in Medan on Friday evenings
 
 
