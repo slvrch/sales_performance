@@ -55,13 +55,27 @@ The data processed through the pipeline is used as analytical-ready data to supp
 - PostgreSQL
 - Staging layer
 - Star schema
-- Data warehouse
-- Data mart
-- Range partitioning by date
-- Stored procedure
-- Batch refresh / SCD Type 1
+- Dimension & fact tables
+- Data mart cube
+- Range partitioning by transaction date
+- Stored procedure for ETL automation
+- Full refresh using TRUNCATE + INSERT
 
+### Source Data
 
+### Staging & Data Transformation
+
+### Data Warehouse
+
+### Data Mart Cube
+
+### Partitioning
+
+### KPI Data Marts
+
+### Stored Procedure & Automation
+
+### ETL Validation
 
 ## Retail Sales Performance Analysis
 
