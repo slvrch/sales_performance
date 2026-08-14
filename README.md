@@ -1,16 +1,56 @@
-# Retail Sales Performance Analysis
+# E-Commerce Data Analytics: ETL Pipeline & Retail Sales Performance
 
-## Background Business
+## PostgreSQL ETL Pipeline
+
+### ETL Overview
+
+#### ETL
+
+ETL (Extract, Transform, Load) is a data processing procedure designed to integrate data from various sources into a single centralized system, making it ready for use in analysis and reporting
+
+#### Purpose
+
+Building an ETL pipeline using PostgreSQL to process e-commerce transaction data transforming it from raw data into structured data ready for retail sales analysis
+
+#### ETL Scope
+
+- Extract transaction data from the source table
+- Load the data into the staging layer
+- Perform data cleansing and transformation
+- Create dimension and fact tables in the data warehouse
+- Create cubes and analytical data marts
+- Automate the process using stored procedures 
+
+#### ETL Architecture
+
+#### Analytical Purpose
+
+The data processed through the pipeline is used as analytical-ready data to support retail sales performance analysis, including analysis of transactions, products, stores, quantities and revenue
+
+#### Key Implementation
+
+- PostgreSQL
+- Staging layer
+- Star schema
+- Data warehouse
+- Data mart
+- Range partitioning by date
+- Stored procedure
+- Batch refresh / SCD Type 1
+
+## Retail Sales Performance Analysis
+
+### Background Business
 
 Retail Crystal, during the January-March 2025 period, experienced high transaction volumes and dynamic changes in customer behaviors. The key performance indicator (KPI) used is total revenue, with a benchmark of maintaining a minimum average monthly revenue of 18.7T. However, revenue showed a downward trend during the analysis period, so it is necessary to monitor sales performance regularly to understand sales trends, best-selling products, regional contributions, and customer transaction patterns.
 
 Therefore, a retail sales performance dashboard has been created to assist with sales analysis, monitor key KPIs, and support decision-making based on transaction data.
 
-## Business Problem
+### Business Problem
 
 The company is experiencing a downward trend in revenue and does not yet have a structured sales monitoring system in place to understand the factors affecting its business performance
 
-## Problem Statement
+### Problem Statement
 
 - What were the sales trends during the January-March 2025 period?
 - Which products made the largest contribution to revenue?
@@ -18,24 +58,25 @@ The company is experiencing a downward trend in revenue and does not yet have a 
 - Which region was the main contributor to revenue?
 - When are customers most active in making purchase?
 
-## Data Understanding
+### Data Understanding
 
-### Dataset Overview
+#### Dataset Overview
+
 - Total records: 2000
 - Fact table: Sales Transactions
 - Dimension: Product, Store, User
 - Analysis Period: January-March 2025
 
-### Feature Categories
+#### Feature Categories
 - Product Information: Product Name, Category, Quantity, Total Price
 - Store & Location Information: Province, City, Store Name
 - Transaction Information: Order ID, Transaction Status, Payment Method, Shipping Method
 - Time Information: Transaction Date, Transaction Time, Day Name, Month
 
-### Data Quality Issue
+#### Data Quality Issue
 - Missing value shipping method
 
-## Analytics
+### Analytics
 
 <img width="626" height="396" alt="image" src="https://github.com/user-attachments/assets/13189a23-c9a8-4c8e-8829-0e647c934f1e" />
 
@@ -73,14 +114,14 @@ Insight:
 - Wednesday and Friday are the days with the highest number of orders
 - The highest trading activity occurs during the midnight and morning periods
 
-## Conclusion
+### Conclusion
 
 - Revenue experienced a downward trend during the January-March 2025 period
 - The decline in revenue was steeper than the decline in the number of transactions, which indicates a fall in AOV
 - Specific products, cities and transaction times are the key contributors to sales performance
 - The dashboard helps identify opportunities for optimizing campaigns based on products, regions, and customer transaction patterns
 
-## Recommendation
+### Recommendation
 
 - Increase AOV through bundling and cross-selling
 - Focus promotions on high-revenue products
