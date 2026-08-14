@@ -6,11 +6,11 @@
 
 #### ETL
 
-ETL (Extract, Transform, Load) is a data processing procedure designed to integrate data from various sources into a single centralized system, making it ready for use in analysis and reporting
+ETL (Extract, Transform, Load) is a data integration process used to extract data from source systems, transforms it into a consistent structure, and load it into a target system for analysis and reporting
 
 #### Purpose
 
-Building an ETL pipeline using PostgreSQL to process e-commerce transaction data transforming it from raw data into structured data ready for retail sales analysis
+Building an ETL pipeline using PostgreSQL to transform raw e-commerce transaction data into structured, analytical-ready data for Retail Sales Performance Analysis 
 
 #### ETL Scope
 
@@ -18,18 +18,33 @@ Building an ETL pipeline using PostgreSQL to process e-commerce transaction data
 - Load the data into the staging layer
 - Perform data cleansing and transformation
 - Create dimension and fact tables in the data warehouse
-- Create cubes and analytical data marts
+- Create a data mart cube and analytical data marts
 - Automate the process using stored procedures 
 
 #### ETL Architecture
 
-The ETL pipeline transforms raw e-commerce transaction data into structured analytical data through staging, data warehouse, and data mart layers. The resulting data is used to support Retail Sales Performance Analysis
+The pipeline follows a layered architecture to transform raw e-commerce transaction data into analytical-ready data.
 
-- Public: source/raw transaction data
-- Staging: initial data preparation and cleaning
-- Data Warehouse: structured dimension and fact tables
-- Data Mart: analytical cube and aggregated KPI tables
-- Retail Sales Analysis: uses the processed data for business analysis and dashboarding
+```mermaid
+flowchart TD
+    A[Public / Source<br/>ecommerce_transaction]
+    B[Staging<br/>Data Preparation & Cleaning]
+    C[Data Warehouse<br/>Dimension + Fact]
+    D[Data Mart<br/>Cube + KPI Data Marts]
+    E[Retail Sales Performance<br/>Analysis / Dashboard]
+
+    A -->|Extract| B
+    B -->|Transform & Load| C
+    C -->|Integration| D
+    D -->|Analytics| E
+```
+
+**Layers:**
+- **Public**: source/raw transaction data
+- **Staging**: initial data preparation and cleaning
+- **Data Warehouse**: structured dimension and fact tables
+- **Data Mart**: analytical cube and aggregated KPI tables
+- **Retail Sales Analysis**: uses the processed data for business analysis and dashboarding
 
 #### Analytical Purpose
 
@@ -45,6 +60,8 @@ The data processed through the pipeline is used as analytical-ready data to supp
 - Range partitioning by date
 - Stored procedure
 - Batch refresh / SCD Type 1
+
+
 
 ## Retail Sales Performance Analysis
 
