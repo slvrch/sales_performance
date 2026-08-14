@@ -23,6 +23,14 @@ Building an ETL pipeline using PostgreSQL to process e-commerce transaction data
 
 #### ETL Architecture
 
+The ETL pipeline transforms raw e-commerce transaction data into structured analytical data through staging, data warehouse, and data mart layers. The resulting data is used to support Retail Sales Performance Analysis
+
+- Public: source/raw transaction data
+- Staging: initial data preparation and cleaning
+- Data Warehouse: structured dimension and fact tables
+- Data Mart: analytical cube and aggregated KPI tables
+- Retail Sales Analysis: uses the processed data for business analysis and dashboarding
+
 #### Analytical Purpose
 
 The data processed through the pipeline is used as analytical-ready data to support retail sales performance analysis, including analysis of transactions, products, stores, quantities and revenue
