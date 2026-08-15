@@ -142,7 +142,7 @@ Duplicate transaction records are handled using `ROW_NUMBER()` partitioned by tr
 
 #### Refresh Strategy
  
-The physical cube table is refreshed using a full-refresh approach by truncating existing records and loading the latest data from the cube view.
+The physical cube table uses a full-refresh approach by truncating existing data and reloading the latest integrated data from the cube view.
 
 `TRUNCATE → INSERT`
 
@@ -151,6 +151,8 @@ This ensures that the cube contains the latest integrated data before downstream
 ### Partitioning
 
 The cube table is partitioned by transaction date using range partitioning, with daily partitions to support time-based analytical queries.
+
+
 ### KPI Data Marts
 
 ### Stored Procedure & Automation
