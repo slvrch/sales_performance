@@ -114,10 +114,43 @@ flowchart LR
 
 ### Data Mart Cube
 
-The data mart cube integrates transaction data from the fact table with descriptive attributes from the product, store, and user dimension tables. The resulting dataset provides an analytical-ready view for downstream aggregation and reporting.
+The data mart cube integrates transaction data from the fact table with descriptive attributes from the product, store, and user dimension tables. The resulting dataset provides an analytical-ready structure for downstream aggregation and reporting.
+
+#### Cube View
+A data mart view is created by joining the fact transaction table with product, store, and user dimensions to provide a denormalized analytical view.
+
+- Fact: `fact_ecommerce_transaction`
+- Product: `dim_ecommerce_product`
+- Store: `dim_ecommerce_store`
+- User: `dim_ecommerce_user`
+
+The resulting view is stored as:
+
+`datamart.vw_dm_cube_ecommerce_transaction`
+
+#### Physical Cube Table
+
+The integrated data is loaded into the physical data mart cube:
+
+`datamart.dm_cube_ecommerce_transaction`
+
+The cube contains transaction, customer, product, store, quantity, revenue, payment, transaction status, and shipping information.
+
+#### Data Deduplication
+
+Duplicate transaction records are handled using `ROW_NUMBER()` partitioned by transaction ID, keeping the latest record based on `last_update`.
+
+#### Refresh Strategy
+ 
+The physical cube table is refreshed using a full-refresh approach by truncating existing records and loading the latest data from the cube view.
+
+`TRUNCATE → INSERT`
+
+This ensures that the cube contains the latest integrated data before downstream KPI data marts are refreshed.
 
 ### Partitioning
 
+The cube table is partitioned by transaction date using range partitioning, with daily partitions to support time-based analytical queries.
 ### KPI Data Marts
 
 ### Stored Procedure & Automation
