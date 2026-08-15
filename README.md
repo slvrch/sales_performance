@@ -63,6 +63,24 @@ The data processed through the pipeline is used as analytical-ready data to supp
 
 ### Source Data
 
+#### Source Table
+
+```public.ecommerce_transaction```: raw/source transaction data to input pipeline
+
+#### Data Content
+| Category    | Example Fields                                                  |
+| ----------- | --------------------------------------------------------------- |
+| Transaction | `id_transaksi`, `waktu_transaksi`, `transaksi_status`           |
+| User        | `id_user`, `nama_user`, `gender_user`, `usia_user`, `kota_user` |
+| Store       | `toko_id`, `toko_nama`, `toko_city`                             |
+| Product     | `id_produk`, `produk_nama`, `produk_kategori`, `produk_harga`   |
+| Sales       | `quantity`, `total_harga`                                       |
+| Payment     | `payment_metode`                                                |
+| Shipping    | `shipping_metode`                                               |
+
+
+The source transaction table serves as the input for the ETL pipeline and is extracted into the staging layer for further cleansing and transformation
+
 ### Staging & Data Transformation
 
 ### Data Warehouse
