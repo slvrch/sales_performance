@@ -114,6 +114,8 @@ flowchart LR
 
 ### Data Mart Cube
 
+The data mart cube integrates transaction data from the fact table with descriptive attributes from the product, store, and user dimension tables. The resulting dataset provides an analytical-ready view for downstream aggregation and reporting.
+
 ### Partitioning
 
 ### KPI Data Marts
