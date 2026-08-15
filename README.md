@@ -65,7 +65,7 @@ The data processed through the pipeline is used as analytical-ready data to supp
 
 #### Source Table
 
-```public.ecommerce_transaction```: raw/source transaction data to input pipeline
+```public.ecommerce_transaction``` is the raw transaction table that serves as the primary data source for the ETL pipeline.
 
 #### Data Content
 | Category    | Example Fields                                                  |
@@ -78,12 +78,39 @@ The data processed through the pipeline is used as analytical-ready data to supp
 | Payment     | `payment_metode`                                                |
 | Shipping    | `shipping_metode`                                               |
 
-
-The source transaction table serves as the input for the ETL pipeline and is extracted into the staging layer for further cleansing and transformation
+The source transaction table serves as the input to the ETL pipeline and is extracted into the staging layer for further processing.
 
 ### Staging & Data Transformation
 
+The staging layer is used for initial data preparation and cleansing before the data is loaded into the data warehouse.
+
+- Load extracted data into the staging table
+- Add `last_update` as ETL metadata
+- Handle missing values in `shipping_metode`
+- Prepare the cleaned data for downstream processing
+
 ### Data Warehouse
+
+The cleaned data from the staging layer is transformed into a structured data warehouse using a star schema. The data warehouse consists of dimension tables and a fact table.
+
+#### Dimension Tables
+
+- `datawarehouse.dim_ecommerce_product`
+- `datawarehouse.dim_ecommerce_store`
+- `datawarehouse.dim_ecommerce_user`
+
+#### Fact Table
+
+- `datawarehouse.fact_ecommerce_transaction`
+
+Dimension tables store descriptive information about products, stores, and users, while the fact table stores e-commerce transaction records and measurable sales attributes such as quantity and total revenue.
+
+```mermaid
+flowchart LR
+    P[dim_ecommerce_product] --> F[fact_ecommerce_transaction]
+    S[dim_ecommerce_store] --> F
+    U[dim_ecommerce_user] --> F
+```
 
 ### Data Mart Cube
 
