@@ -59,7 +59,9 @@ The data processed through the pipeline is used as analytical-ready data to supp
 - Data mart cube
 - Range partitioning by transaction date
 - Stored procedure for ETL automation
-- Full refresh using TRUNCATE + INSERT
+- Batch refresh strategy
+- `TRUNCATE + INSERT` for staging and analytical data mart
+- Duplicate prevention in fact loading
 
 ### Source Data
 
@@ -103,7 +105,7 @@ The cleaned data from the staging layer is transformed into a structured data wa
 
 - `datawarehouse.fact_ecommerce_transaction`
 
-Dimension tables store descriptive information about products, stores, and users, while the fact table stores e-commerce transaction records and measurable sales attributes such as quantity and total revenue.
+Dimension tables store descriptive information about products, stores, and users, while the fact table stores e-commerce transaction records and measurable sales attributes such as quantity and transaction value.
 
 ```mermaid
 flowchart LR
@@ -134,7 +136,7 @@ The integrated data is loaded into the physical data mart cube:
 
 `datamart.dm_cube_ecommerce_transaction`
 
-The cube contains transaction, customer, product, store, quantity, revenue, payment, transaction status, and shipping information.
+The cube contains transaction, user, product, store, quantity, revenue, payment, transaction status, and shipping information.
 
 #### Data Deduplication
 
@@ -160,13 +162,14 @@ This partitioning strategy helps optimize time-based analytical queries through 
 
 The KPI data marts are created from the data mart cube to provide aggregated dataset for specific analytical requirements. Each data mart combines relevant business metrics with analytical dimensions to support transaction, product, store, and revenue analysis.
 
-| Step | Data Mart                         | Metric                                       | Dimension | Analytical Purpose                   |
-| ---- | --------------------------------- | -------------------------------------------- | --------- | ------------------------------------ |
-| 10   | Most Transactions by Date         | `COUNT(transaction)`                         | Date      | Analyze transaction volume over time |
-| 11   | Total Transaction & User per Hour | `COUNT(transaction)`, `COUNT(DISTINCT user)` | Hour      | Identify peak customer activity      |
-| 12   | Total Quantity by Product         | `SUM(quantity)`                              | Product   | Analyze product sales volume         |
-| 13   | Total Quantity by Store           | `SUM(quantity)`                              | Store     | Compare store sales volume           |
-| 14   | Total Revenue by Store            | `SUM(total_harga)`                           | Store     | Compare store revenue performance    |
+| Step | Data Mart                         | Metric                                      | Dimension | Analytical Purpose                   |
+| ---- | --------------------------------- | ------------------------------------------- | --------- | ------------------------------------ |
+| 10   | Most Transactions by Date         | `COUNT(*)`                                  | Date      | Analyze transaction volume over time |
+| 11   | Total Transaction & User per Hour | `COUNT(id_sale)`, `COUNT(DISTINCT id_user)` | Hour      | Identify peak customer activity      |
+| 12   | Total Quantity by Product         | `SUM(quantity)`                             | Product   | Analyze product sales volume         |
+| 13   | Total Quantity by Store           | `SUM(quantity)`                             | Store     | Compare store sales volume           |
+| 14   | Total Revenue by Store            | `SUM(total_harga)`                          | Store     | Compare store revenue performance    |
+
 
 The KPI data marts provide pre-aggregated analytical dataset, while the data mart cube remains the primary detailed analytical source for broader business analysis and reporting.
 
@@ -223,7 +226,7 @@ The `generate_ecommerce_transaction()` stored procedure encapsulates the ETL wor
 
 #### Refresh Strategy
 
-The staging and analytical data marts use a batch full-refresh approach. Existing data is truncate and reloaded from the latest source or upstream analytical layer.
+The staging and analytical data marts use a batch full-refresh approach. Existing data is truncated and reloaded from the latest source or upstream analytical layer.
 
      Latest Source Data
             ↓
@@ -235,7 +238,7 @@ The staging and analytical data marts use a batch full-refresh approach. Existin
 
 #### Partition Automation
 
-Partition creation is included on the ETL workflow so that the analytical cube is prepared before data loading.
+Daily partitions are created as part of the ETL workflow before the cube before is loaded.
 
 #### Execution
 
@@ -280,7 +283,11 @@ Data quality checks were performed after executing the ETL stored procedure to v
 
 The data mart cube was configured with daily range partitions from `2025-01-01` to `2025-03-28`.
 
-**Result:** PASS - aLL expected partitions were created.
+| Validation | Expected | Actual |
+|---|---:|---:|
+| Daily partitions | 87 | 87 |
+
+**Result:** PASS - ALL expected daily partitions were created.
 
 #### Data Mart Output
 
