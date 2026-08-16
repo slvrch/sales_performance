@@ -233,18 +233,6 @@ The staging and analytical data marts use a batch full-refresh approach. Existin
             ↓
        Refreshed Table
 
-Refresh Strategy for KPI Data Marts:
-
-       Data Mart Cube
-             ↓
-          TRUNCATE
-             ↓
-         Aggregate
-             ↓
-           INSERT
-             ↓
-     Updated KPI Data Mart
-
 #### Partition Automation
 
 Partition creation is included on the ETL workflow so that the analytical cube is prepared before data loading.
@@ -264,7 +252,41 @@ The complete ETL workflow can be executed through a single `CALL` statement inst
 
 ### ETL Validation
 
+Data quality checks were performed after executing the ETL stored procedure to verify data completeness, transformation results uniqueness, and partition creation.
 
+#### Record Count
+
+| Layer | Row Count |
+|---|---:|
+| Source | 2,000 |
+| Staging | 2,000 |
+
+**Result:** PASS - The staging layer contains the same number of records as the source table.
+
+#### Missing Value
+
+| Layer | Missing `shipping_metode` |
+|---|---:|
+| Source | 1,324 |
+| Staging | 0 |
+
+**Result:** PASS - Empty values in `shipping_metode` were replaced with `Not Available` during staging transformation.
+
+#### Duplicate Transaction
+
+**Result:** PASS - No duplicate `id_sale` values were found in the data mart cube.
+
+#### Partition Validation
+
+The data mart cube was configured with daily range partitions from `2025-01-01` to `2025-03-28`.
+
+**Result:** PASS - aLL expected partitions were created.
+
+#### Data Mart Output
+
+The KPI data marts were checked to ensure that ETL process produced the expected analytical outputs.
+
+**Result:** PASS - KPI data marts were successfully populated.
 
 ## Retail Sales Performance Analysis
 
