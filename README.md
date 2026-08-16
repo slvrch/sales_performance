@@ -89,6 +89,7 @@ The staging layer is used for initial data preparation and cleansing before the 
 - Load extracted data into the staging table
 - Add `last_update` as ETL metadata
 - Handle missing values in `shipping_metode`
+- Phone number fields were standardized by removing formatting characters while preserving the original numeric value
 - Prepare the cleaned data for downstream processing
 
 ### Data Warehouse
