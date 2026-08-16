@@ -225,25 +225,25 @@ The `generate_ecommerce_transaction()` stored procedure encapsulates the ETL wor
 
 The staging and analytical data marts use a batch full-refresh approach. Existing data is truncate and reloaded from the latest source or upstream analytical layer.
 
-Latest Source Data
-       ↓
-    TRUNCATE
-       ↓
-     INSERT
-       ↓
- Refreshed Table
+     Latest Source Data
+            ↓
+         TRUNCATE
+            ↓
+          INSERT
+            ↓
+       Refreshed Table
 
 Refresh Strategy for KPI Data Marts:
 
-Data Mart Cube
-      ↓
-   TRUNCATE
-      ↓
-   Aggregate
-      ↓
-    INSERT
-      ↓
-Updated KPI Data Mart
+       Data Mart Cube
+             ↓
+          TRUNCATE
+             ↓
+         Aggregate
+             ↓
+           INSERT
+             ↓
+     Updated KPI Data Mart
 
 #### Partition Automation
 
