@@ -68,7 +68,7 @@ The data processed through the pipeline is used as analytical-ready data to supp
 ```public.ecommerce_transaction``` is the raw transaction table that serves as the primary data source for the ETL pipeline.
 
 #### Data Content
-| Category    | Example Fields                                                  |
+| Category    | Fields                                                          |
 | ----------- | --------------------------------------------------------------- |
 | Transaction | `id_transaksi`, `waktu_transaksi`, `transaksi_status`           |
 | User        | `id_user`, `nama_user`, `gender_user`, `usia_user`, `kota_user` |
@@ -150,14 +150,23 @@ This ensures that the cube contains the latest integrated data before downstream
 
 ### Partitioning
 
-The cube table is partitioned by transaction date using range partitioning, with daily partitions to support time-based analytical queries.
+The cube table is partitioned by `transaksi_date` using range partitioning, with one partition for each day.
 
+Daily partitions are created for the transaction date range from `2025-01-01` to `2025-03-28`.
+
+This partitioning strategy helps optimize time-based analytical queries through partition pruning and simplifies the management of historical transaction data.
 
 ### KPI Data Marts
 
+The KPI data marts are designed to provide aggregated analytical views from the data mart cube. The selected metrics support transaction, product, store, and revenue analysis required for downstream Retail Sales Performance Analysis.
+
 ### Stored Procedure & Automation
 
+
+
 ### ETL Validation
+
+
 
 ## Retail Sales Performance Analysis
 
@@ -171,7 +180,7 @@ Therefore, a retail sales performance dashboard has been created to assist with 
 
 The company is experiencing a downward trend in revenue and does not yet have a structured sales monitoring system in place to understand the factors affecting its business performance
 
-### Problem Statement
+### Questions Business
 
 - What were the sales trends during the January-March 2025 period?
 - Which products made the largest contribution to revenue?
