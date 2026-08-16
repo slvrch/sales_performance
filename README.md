@@ -172,7 +172,95 @@ The KPI data marts provide pre-aggregated analytical dataset, while the data mar
 
 ### Stored Procedure & Automation
 
+**Purpose:** The ETL workflow is automated using a PostgreSQL stored procedure to execute the data loading, transformation, data mart refresh, and partitioning processes as a single workflow.
 
+#### Stored Procedure
+
+CREATE OR REPLACE PROCEDURE datawarehouse.generate_ecommerce_transaction()
+LANGUAGE plpgsql
+AS $procedure$
+BEGIN
+
+    -- Step 1–14: ETL process
+
+END;
+$procedure$;
+
+The `generate_ecommerce_transaction()` stored procedure encapsulates the ETL workflow into a single executable procedure. It is implemented using PostgreSQL PL/pSQL.
+
+#### ETL Automation Workflow
+
+                    CALL PROCEDURE
+                         │
+                         ▼
+        generate_ecommerce_transaction()
+                         │
+        ┌────────────────┼────────────────┐
+        ▼                ▼                ▼
+    STAGING         DATA WAREHOUSE     DATA MART
+        │                │                │
+   Step 1            Step 2–5          Step 6–14
+        │                │                │
+   Cleansing       Dimension + Fact   Cube + KPI
+        │                │                │
+        └────────────────┴────────────────┘
+                         │
+                         ▼
+                  Analytical Data
+                         │
+                         ▼
+                     Power BI
+
+
+| Stage      | Process                | Output                          |
+| ---------- | ---------------------- | ------------------------------- |
+| Step 1     | Load & cleanse staging | `stg_ecommerce_transaction`     |
+| Step 2–4   | Load dimensions        | Product, Store, User            |
+| Step 5     | Load fact              | `fact_ecommerce_transaction`    |
+| Step 6–9   | Build & refresh cube   | `dm_cube_ecommerce_transaction` |
+| Step 8     | Create partitions      | Daily transaction partitions    |
+| Step 10–14 | Refresh KPI data marts | Analytical summaries            |
+
+#### Refresh Strategy
+
+The staging and analytical data marts use a batch full-refresh approach. Existing data is truncate and reloaded from the latest source or upstream analytical layer.
+
+Latest Source Data
+       ↓
+    TRUNCATE
+       ↓
+     INSERT
+       ↓
+ Refreshed Table
+
+Refresh Strategy for KPI Data Marts:
+
+Data Mart Cube
+      ↓
+   TRUNCATE
+      ↓
+   Aggregate
+      ↓
+    INSERT
+      ↓
+Updated KPI Data Mart
+
+#### Partition Automation
+
+Partition creation is included on the ETL workflow so that the analytical cube is prepared before data loading.
+
+#### Execution
+
+`CALL datawarehouse.generate_ecommerce_transaction();`
+
+The complete ETL workflow can be executed through a single `CALL` statement instead of manually running each ETL step.
+
+#### Automation Outcome
+
+- Consistency: ETL steps are executed using a standardized workflow.
+- Efficiency: Multiple SQL operations can be executed through a single procedure call
+- Maintainability: ETL logic is centralized in one stored procedure
+- Reusability: The procedure can be executed again when the source data needs to be refreshed
 
 ### ETL Validation
 
