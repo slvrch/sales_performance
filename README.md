@@ -158,7 +158,17 @@ This partitioning strategy helps optimize time-based analytical queries through 
 
 ### KPI Data Marts
 
-The KPI data marts are designed to provide aggregated analytical views from the data mart cube. The selected metrics support transaction, product, store, and revenue analysis required for downstream Retail Sales Performance Analysis.
+The KPI data marts are created from the data mart cube to provide aggregated dataset for specific analytical requirements. Each data mart combines relevant business metrics with analytical dimensions to support transaction, product, store, and revenue analysis.
+
+| Step | Data Mart                         | Metric                                       | Dimension | Analytical Purpose                   |
+| ---- | --------------------------------- | -------------------------------------------- | --------- | ------------------------------------ |
+| 10   | Most Transactions by Date         | `COUNT(transaction)`                         | Date      | Analyze transaction volume over time |
+| 11   | Total Transaction & User per Hour | `COUNT(transaction)`, `COUNT(DISTINCT user)` | Hour      | Identify peak customer activity      |
+| 12   | Total Quantity by Product         | `SUM(quantity)`                              | Product   | Analyze product sales volume         |
+| 13   | Total Quantity by Store           | `SUM(quantity)`                              | Store     | Compare store sales volume           |
+| 14   | Total Revenue by Store            | `SUM(total_harga)`                           | Store     | Compare store revenue performance    |
+
+The KPI data marts provide pre-aggregated analytical dataset, while the data mart cube remains the primary detailed analytical source for broader business analysis and reporting.
 
 ### Stored Procedure & Automation
 
