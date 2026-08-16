@@ -199,9 +199,9 @@ The `generate_ecommerce_transaction()` stored procedure encapsulates the ETL wor
         ▼                ▼                ▼
     STAGING         DATA WAREHOUSE     DATA MART
         │                │                │
-   Step 1            Step 2–5          Step 6–14
+    Step 1            Step 2–5          Step 6–14
         │                │                │
-   Cleansing       Dimension + Fact   Cube + KPI
+    Cleansing       Dimension + Fact   Cube + KPI
         │                │                │
         └────────────────┴────────────────┘
                          │
