@@ -388,4 +388,7 @@ Insight:
 - Run promotions during peak transaction times
 - Combine products, regions and transaction times to create data-driven campaigns, such as promotions for sports products in Medan on Friday evenings
 
+### Overview Dashboard
+
+<img width="981" height="556" alt="image" src="https://github.com/user-attachments/assets/9480aa8e-c102-4b09-b571-10f4818c7b62" />
 
