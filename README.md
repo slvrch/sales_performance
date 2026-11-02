@@ -322,12 +322,13 @@ The analysis uses a structured PostgreSQL ETL pipeline and Power BI dashboard to
 
 #### Business Problem
 
-The business requires a structured view of its sales performance to understand changes in revenue, transaction volume, and average order value (AOV).
+The retail business generated revenue from multiple product categories and store locations during January–March 2025. However, an initial analysis of the transaction data identified a decline in sales performance.
 
-Without an integrated sales performance analysis, it may be difficult to identify which products and categories contribute most to revenue, how revenue is distributed across store cities, and when transaction activity is relatively higher.
+Revenue decreased from Rp23.1 million in January (January 1–28) to Rp15.3 million in March (March 1–28), representing a 30% decline over comparable observation periods.
 
-Therefore, a data-driven analysis is needed to evaluate overall sales performance, identify important sales patterns, and highlight areas for further business investigation.
+This situation highlights the need to evaluate changes in transaction volume and Average Order Value (AOV), assess revenue contributions across products, categories, and store cities, and understand transaction activity patterns.
 
+The analysis aims to identify key sales performance patterns and areas requiring further business investigation to support data-driven decision-making.
 #### Business Objectives
 
 1. Evaluate changes in revenue, transaction volume, and Average Order Value (AOV) across comparable periods.
