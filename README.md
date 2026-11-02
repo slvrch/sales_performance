@@ -296,99 +296,179 @@ The KPI data marts were checked to ensure that ETL process produced the expected
 
 **Result:** PASS - KPI data marts were successfully populated.
 
-## Retail Sales Performance Analysis
+## Power BI Dashboard
+The interactive dashboard presents the final analytical results and addresses the five business questions through the following views:
 
-### Background Business
+- Overall Performance Change
+- Monthly Revenue and Transactions Trend
+- Monthly AOV Trend
+- Revenue Contribution by Category
+- Top 5 Products by Revenue Contribution
+- Revenue Contribution by Store City
+- Transaction Distribution by Day and Time
 
-Retail Crystal, during the January-March 2025 period, experienced high transaction volumes and dynamic changes in customer behaviors. The key performance indicator (KPI) used is total revenue, with a benchmark of maintaining a minimum average monthly revenue of 18.7T. However, revenue showed a downward trend during the analysis period, so it is necessary to monitor sales performance regularly to understand sales trends, best-selling products, regional contributions, and customer transaction patterns.
+The overall performance KPIs use comparable 28-day periods, while monthly trends use all available actual transaction data for each month.
 
-Therefore, a retail sales performance dashboard has been created to assist with sales analysis, monitor key KPIs, and support decision-making based on transaction data.
+### Retail Sales Performance Analysis
 
-### Business Problem
 
-The company is experiencing a downward trend in revenue and does not yet have a structured sales monitoring system in place to understand the factors affecting its business performance
+#### Background Business
 
-### Questions Business
+Retail Crystal businesses generate sales transactions across multiple product categories and store locations. Monitoring sales performance is important to understand revenue trends, transaction activity, product contributions, and geographic performance.
 
-- What were the sales trends during the January-March 2025 period?
-- Which products made the largest contribution to revenue?
-- Which category had the highest sales volume?
-- Which region was the main contributor to revenue?
-- When are customers most active in making purchase?
+This project analyzes retail transaction data from January 1 to March 28, 2025, to evaluate sales performance and identify patterns across products, categories, store cities, and transaction periods.
 
-### Data Understanding
+The analysis uses a structured PostgreSQL ETL pipeline and Power BI dashboard to transform transaction data into business insights that can support sales monitoring and decision-making.
 
-#### Dataset Overview
+#### Business Problem
+
+The business requires a structured view of its sales performance to understand changes in revenue, transaction volume, and average order value (AOV).
+
+Without an integrated sales performance analysis, it may be difficult to identify which products and categories contribute most to revenue, how revenue is distributed across store cities, and when transaction activity is relatively higher.
+
+Therefore, a data-driven analysis is needed to evaluate overall sales performance, identify important sales patterns, and highlight areas for further business investigation.
+
+#### Business Objectives
+
+1. Evaluate changes in revenue, transaction volume, and Average Order Value (AOV) across comparable periods.
+2. Identify the product categories and individual products contributing most to total revenue.
+3. Evaluate revenue contribution across store cities.
+4. Analyze transaction distribution by day of week and time of day.
+5. Provide data-driven recommendations to support sales performance monitoring and business evaluation.
+
+#### Questions Business
+
+1. How did revenue and transaction volume change between January and March 2025?
+2. How did Average Order Value (AOV) change during the observation period?
+3. Which products and product categories contributed the most to total revenue?
+4. Which store cities contributed the most to total revenue?
+5. How were transactions distributed across different days of the week and times of day?
+
+#### Data Understanding
+
+##### Dataset Overview
 
 - Total records: 2000
 - Fact table: Sales Transactions
 - Dimension: Product, Store, User
 - Analysis Period: January-March 2025
 
-#### Feature Categories
+##### Feature Categories
 - Product Information: Product Name, Category, Quantity, Total Price
 - Store & Location Information: Province, City, Store Name
 - Transaction Information: Order ID, Transaction Status, Payment Method, Shipping Method
 - Time Information: Transaction Date, Transaction Time, Day Name, Month
 
-#### Data Quality Issue
+##### Data Quality Issue
 - Missing value shipping method
 
-### Analytics
+#### Analytical Methodology
 
-<img width="626" height="396" alt="image" src="https://github.com/user-attachments/assets/13189a23-c9a8-4c8e-8829-0e647c934f1e" />
+The analysis uses the available transaction data from January 1 to March 28, 2025.
 
-Insight:
+1. Monthly Performance Analysis
 
-- There was a 35% drop in revenue from January to March
-- The number of transactions declined by only 17%
-- February showed early signs of a decline in sales quality before demand fell in March
+Monthly revenue, transaction volume, and AOV are calculated using all available transaction records within each month.
 
-<img width="668" height="364" alt="image" src="https://github.com/user-attachments/assets/ebaa084e-6974-4f29-bcf0-7bea8e93dfc0" />
+- Total Revenue: Sum of transaction revenue.
+- Total Transactions: Count of distinct transaction IDs.
+- Average Order Value (AOV): Total Revenue divided by distinct transactions.
 
-Insight:
+2. Comparable Period Performance Analysis
 
-- The Under Armour Gym Bag has become the product with the highest revenue contribution of 25.2 T
-- Revenue is concentrated on a few key products, with an uneven contribution
+To provide a fair comparison between January and March, the overall performance change uses an equal observation window:
 
-<img width="687" height="350" alt="image" src="https://github.com/user-attachments/assets/0bd74b32-fc52-4314-a94c-21a723e96f93" />
+- Starting Period: January 1–28, 2025.
+- Ending Period: March 1–28, 2025.
 
-Insight:
+Percentage change is calculated as:
 
-- Sports accounted for the highest proportion at 21.68%
-- The distribution of quantities across categories is relatively even, with significant differences in their contributions
+Change (%) = (Ending Period Value - Starting Period Value) / Starting Period Value × 100%
 
-<img width="782" height="456" alt="image" src="https://github.com/user-attachments/assets/44244589-5632-4ad7-b150-a550e3339a73" />
+The same comparable period is applied to revenue, transaction volume, and AOV.
 
-Insight:
+3. Revenue Contribution Analysis
 
-- Medan is the city with the highest revenue contribution, amounting to 10.2T
-- Semarang and Makassar have shown almost identical revenue performance despite being from different regions
+Product, category, and store city performance are evaluated based on their contribution to total revenue.
 
-<img width="505" height="300" alt="image" src="https://github.com/user-attachments/assets/eb6f06ac-ca90-4b48-bedf-6c1f5ec2a32e" />
+Revenue Contribution (%) = Revenue by Entity / Total Revenue × 100%
 
-Insight:
+The Top 5 Products visual ranks products by revenue and displays their contribution to the overall revenue base.
 
-- Wednesday and Friday are the days with the highest number of orders
-- The highest trading activity occurs during the midnight and morning periods
+4. Transaction Time Distribution
 
-### Conclusion
+Transaction distribution is evaluated using the percentage of total transactions grouped by day of the week and time of day.
 
-- Revenue experienced a downward trend during the January-March 2025 period
-- The decline in revenue was steeper than the decline in the number of transactions, which indicates a fall in AOV
-- Specific products, cities and transaction times are the key contributors to sales performance
-- The dashboard helps identify opportunities for optimizing campaigns based on products, regions, and customer transaction patterns
+This analysis identifies transaction activity patterns rather than measuring revenue or operational capacity.
 
-### Recommendation
+#### Key Business Insights
 
-- Increase AOV through bundling and cross-selling
-- Focus promotions on high-revenue products
-- Optimize inventory for high-volume categories
-- Focus campaigns on the Top 5 cities
-- Run promotions during peak transaction times
-- Combine products, regions and transaction times to create data-driven campaigns, such as promotions for sports products in Medan on Friday evenings
+##### 1. Overall Sales Performance
 
-### Overview Dashboard
+- Revenue decreased by 30% between January 1–28 and March 1–28, 2025.
+- Transaction volume declined by 9% over the same comparable periods.
+- Average Order Value (AOV) decreased by 23%.
 
-<img width="981" height="556" alt="image" src="https://github.com/user-attachments/assets/9480aa8e-c102-4b09-b571-10f4818c7b62" />
+Business Insight:
+
+The revenue decline was accompanied by decreases in both transaction volume and AOV. The larger decline in AOV indicates that the average transaction value also contributed to the overall revenue reduction.
+
+##### 2. Product and Category Revenue Contribution
+
+- Sports contributed 45.82% of total revenue.
+- Home Appliances contributed 34.55%.
+- Together, these two categories accounted for 80.37% of total category revenue.
+- Under Armour Gym Bag and Philips Sonicare Toothbrush were the leading products in the Top 5 Products analysis.
+
+Business Insight:
+
+Revenue contribution was concentrated in the Sports and Home Appliances categories. The leading products also represented a substantial share of revenue within the product analysis, indicating the importance of monitoring key product performance.
+
+##### 3. Geographic Revenue Contribution
+
+- Medan recorded the highest revenue contribution at 18.19%.
+- Semarang contributed 14.68%.
+- Makassar contributed 14.65%.
+- The three leading cities accounted for 47.52% of total revenue.
+
+Business Insight:
+
+Revenue contribution varied across store cities, with Medan representing the largest share among the locations analyzed.
+
+##### 4. Transaction Distribution by Day and Time
+
+- Midnight recorded the highest time-of-day transaction contribution at 25.95%.
+- Morning followed closely at 25.85%.
+- Wednesday recorded the highest daily transaction contribution at 15.25%.
+- Transaction distribution was relatively balanced across the four time periods.
+
+Business Insight:
+
+Transaction activity was relatively evenly distributed throughout the observed time periods, with slightly higher contributions during Midnight and Morning. Wednesday also recorded the highest share of transactions among weekdays.
+
+#### Conclusion
+
+The Retail Sales Performance Analysis provides an overview of sales performance across revenue, transaction volume, AOV, product categories, store cities, and transaction activity patterns.
+
+The comparable-period analysis identified a 30% decline in revenue, a 9% decrease in transaction volume, and a 23% decline in AOV between January 1–28 and March 1–28, 2025.
+
+The revenue contribution analysis highlighted Sports and Home Appliances as the leading categories, while Medan recorded the highest contribution among the analyzed cities. Transaction activity was relatively balanced across different days and times.
+
+These findings provide a basis for further investigation into declining sales performance, product contribution, geographic performance, and transaction activity to support business monitoring and decision-making.
+
+#### Project Limitations
+
+- The dataset covers January 1 to March 28, 2025, and does not represent a full calendar quarter.
+- The analysis describes historical sales patterns and does not establish causal relationships behind revenue changes.
+- Revenue contribution does not represent product profitability because product cost and margin information are not included.
+- Transaction distribution percentages do not independently measure operational capacity or staffing requirements.
+
+#### Recommendation
+
+- Evaluate the factors behind the decline in revenue, transaction volume, and AOV. Further analysis can focus on product-level sales changes, transaction value distribution, pricing, and customer purchasing patterns.
+- Prioritize inventory monitoring for leading products and major revenue-contributing categories. Evaluate opportunities for product bundling and cross-selling while monitoring their impact on average transaction value.
+- Monitor sales performance in Medan, which recorded the highest revenue contribution. Compare product mix and sales trends across other cities to identify opportunities for improvement.
+- Use transaction volume by day and time to evaluate operational activity. Further investigation into absolute transaction counts and operational capacity is recommended before adjusting staffing or service availability.
+- Establish regular monitoring of revenue, transaction volume, AOV, and product and city contributions to identify changes in sales performance and support data-driven business evaluation.14:02
+
 
