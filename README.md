@@ -311,6 +311,8 @@ The overall performance KPIs use comparable 28-day periods, while monthly trends
 
 ### Retail Sales Performance Analysis
 
+<img width="939" height="491" alt="image" src="https://github.com/user-attachments/assets/0af5ddd1-0c26-4f10-9341-2dc299feb915" />
+
 
 #### Background Business
 
@@ -329,6 +331,7 @@ Revenue decreased from Rp23.1 million in January (January 1–28) to Rp15.3 mill
 This situation highlights the need to evaluate changes in transaction volume and Average Order Value (AOV), assess revenue contributions across products, categories, and store cities, and understand transaction activity patterns.
 
 The analysis aims to identify key sales performance patterns and areas requiring further business investigation to support data-driven decision-making.
+
 #### Business Objectives
 
 1. Evaluate changes in revenue, transaction volume, and Average Order Value (AOV) across comparable periods.
@@ -339,11 +342,10 @@ The analysis aims to identify key sales performance patterns and areas requiring
 
 #### Questions Business
 
-1. How did revenue and transaction volume change between January and March 2025?
-2. How did Average Order Value (AOV) change during the observation period?
-3. Which products and product categories contributed the most to total revenue?
-4. Which store cities contributed the most to total revenue?
-5. How were transactions distributed across different days of the week and times of day?
+1. How did revenue, transaction volume, AOV change between comparable periods?
+2. Which products and product categories contributed the most to total revenue?
+3. Which store cities contributed the most to total revenue?
+4. How were transactions distributed across different days and times?
 
 #### Data Understanding
 
